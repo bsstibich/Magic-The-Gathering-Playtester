@@ -7,27 +7,14 @@ class Deck:
 		self.list = []
 		self.hand = []
 
-	def printCurrentList(self): #May remove
-		limitCounter = 0
-
-		print("\nCurrent top 10 cards:\n")
-		for card in self.list:
-			if limitCounter != 10:
-				print(card.name)
-				limitCounter += 1
-
 	def draw(self, drawAmount):
 		for i in range(drawAmount):
 			self.hand.append(self.list[0])
 			self.list.pop(0)
 
-	#def play(self, card): #make board object to move card to
-
-
 	def shuffle(self):
 		random.shuffle(self.list)
 		random.shuffle(self.list) #Do it twice for twice the shuffling :^)
-		
 		
 	def makelist(self): #takes MTGA exported decklist from decklist.txt and formats it into a functional decklist
 		deckCompact = []
@@ -63,10 +50,10 @@ class Deck:
 
 
 		for card in deckCompact: 
-			for cardFull in root.iter('card'): #checks land type
+			for cardFull in root.iter('card'): 
 				for cardFull2 in cardFull.iter('name'):
-					for cardFull3 in cardFull.iter('maintype'):
-						if cardFull3.text == "Land" and cardFull2.text == card.name:
+					for cardFull3 in cardFull.iter('maintype'): #Check maintype for "Land", "Instant", or "Sorcery" and marks them appropriately 
+						if cardFull3.text == "Land" and cardFull2.text == card.name: 
 							card.land = True
 						elif (cardFull3.text == "Instant")  and (cardFull2.text == card.name):
 							card.instsorc = True
@@ -76,7 +63,6 @@ class Deck:
 
 			for quant in range(card.quantity):
 				deck.append(Card(card.name, card.quantity, card.land, card.instsorc))
-				#print(card.name + "   " + str(card.instsorc))
 	
 		print("Deck List Loaded...")
 		self.list = deck
