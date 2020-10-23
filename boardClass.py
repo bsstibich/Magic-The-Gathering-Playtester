@@ -23,6 +23,5 @@ class Board():
 				self.state.pop(counter)
 			counter += 1
 		counter = 0
-#compainon and side board don't work
 
 

@@ -35,18 +35,23 @@ class Deck:
 		
 		for line in deckRaw:
 			temp = line.split()
-			if len(temp[0]) > 0 and len(temp[0]) < 3:
-				for theo in temp:
-					if len(temp[0]) > 0 and len(temp[0]) < 3:
-						cardquant = int(theo)
-						temp[counter2] = ''
-						for betty in temp:
-							cardname += (betty + " ") 
-						cardname = cardname[1:-1] #cuts out extra spaces at begining and end
-						deckCompact.append(Card(cardname, cardquant, False, False))
-						cardname = ""
-						cardquant = 0
-				counter += 1
+			if temp == "Sideboard": #ends the deck once the side board starts
+					break
+			elif len(temp) == 0: #skips empty lines
+				continue
+			else:
+				if len(temp[0]) > 0 and len(temp[0]) < 3:
+					for theo in temp:
+						if len(temp[0]) > 0 and len(temp[0]) < 3:
+							cardquant = int(theo)
+							temp[counter2] = ''
+							for betty in temp:
+								cardname += (betty + " ") 
+							cardname = cardname[1:-1] #cuts out extra spaces at begining and end
+							deckCompact.append(Card(cardname, cardquant, False, False))
+							cardname = ""
+							cardquant = 0
+					counter += 1
 
 
 		for card in deckCompact: 
