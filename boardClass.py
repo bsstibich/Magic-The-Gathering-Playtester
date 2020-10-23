@@ -11,7 +11,12 @@ class Board():
 		else:
 			self.land.append(hand[position])
 		hand.pop(position)
-	def checkSpells(self): #Didn't get rid of Into the Story?
+	def checkSpells(self): #Does two loops because 1 loop was causing some spells to not get properly popped
+		counter = 0
+		for card in self.state:
+			if card.instsorc == True:
+				self.state.pop(counter)
+			counter += 1
 		counter = 0
 		for card in self.state:
 			if card.instsorc == True:
